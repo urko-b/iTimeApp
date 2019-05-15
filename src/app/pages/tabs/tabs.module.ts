@@ -7,6 +7,7 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
 import { TabsPage } from './tabs.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TabsPageRoutingModule,
     SharedModule
   ],
-  declarations: [TabsPage]
+  declarations: [
+    TabsPage,
+    LogoutComponent
+  ]
 })
 export class TabsPageModule { }

@@ -29,7 +29,7 @@ export class AuthService {
 
   public authenticate(): void {
     const headers: HttpHeaders = new HttpHeaders({ 'Authorization': environment.api_secret });
-    this.httpClient.get(`${environment.api_url}/api/v1/auth`, { headers }).subscribe((responseToken: string) => {
+    this.httpClient.get(`${environment.api_url}/auth`, { headers }).subscribe((responseToken: string) => {
       localStorage.setItem('requests-token', responseToken);
       localStorage.setItem('guard-token', generateToken());
     });

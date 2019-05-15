@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthModule } from '../auth/auth.module';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [],
@@ -9,5 +10,8 @@ import { AuthModule } from '../auth/auth.module';
     CommonModule
   ],
   exports: [],
+  providers: [
+    LoginService
+  ],
 })
 export class SharedModule { }

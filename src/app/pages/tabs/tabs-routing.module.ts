@@ -17,11 +17,11 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'time-tracking',
         children: [
           {
             path: '',
-            loadChildren: './tab2/tab2.module#Tab2PageModule'
+            loadChildren: './time-tracking/time-tracking.module#TimeTrackingPageModule'
           }
         ]
       },

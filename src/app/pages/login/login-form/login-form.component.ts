@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { LoginService } from '../../../shared/services/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -7,12 +7,16 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+  public success = true;
   constructor(private loginService: LoginService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loginService.subscription$.subscribe((success: boolean) => {
+      this.success = success;
+    });
+  }
 
   public login(form): void {
-    console.log('form.form.value', form.form.value);
     this.loginService.login(form.form.value.email, form.form.value.password);
   }
 }
