@@ -27,17 +27,18 @@ const isTokenValid = (token: any): boolean => {
 export class AuthService {
   constructor(public httpClient: HttpClient) { }
 
-  public authenticate(): void {
+  public authenticate(whenComplete?: Function) {
     const headers: HttpHeaders = new HttpHeaders({ 'Authorization': environment.api_secret });
-    this.httpClient.get(`${environment.api_url}/auth`, { headers }).subscribe((responseToken: string) => {
-      localStorage.setItem('requests-token', responseToken);
-      localStorage.setItem('guard-token', generateToken());
-    });
+    this.httpClient.get(`${environment.api_url}/auth`, { headers })
+      .subscribe((responseToken: string) => {
+        localStorage.setItem('requests-token', responseToken);
+        localStorage.setItem('guard-token', generateToken());
+      }, null, () => whenComplete());
   }
 
   public isAuthenticated(): boolean {
     const guardToken = localStorage.getItem('guard-token');
-    if (!guardToken) {
+    if (guardToken === undefined || guardToken == null) {
       return false;
     }
 

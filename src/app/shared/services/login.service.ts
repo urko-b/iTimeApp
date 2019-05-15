@@ -17,12 +17,11 @@ export class LoginService {
   public login(email: string, password: string): void {
     const body = { email, password };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpClient.post(`${environment.localhost_api_url}/user/login`, body, { headers })
+    this.httpClient.post(`${environment.api_url}/user/login`, body, { headers })
       .subscribe((email: string) => {
         if (email !== undefined && email !== null) {
           localStorage.setItem('email', email);
-          this.authService.authenticate();
-          this.router.navigate(['/tabs']);
+          this.authService.authenticate(() => this.router.navigate(['/tabs']));
         }
       }, (error) => {
         this.subscription$.next(false);

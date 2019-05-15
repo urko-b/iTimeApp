@@ -4,18 +4,9 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
-      {
-        path: 'tab1',
-        children: [
-          {
-            path: '',
-            loadChildren: './tab1/tab1.module#Tab1PageModule'
-          }
-        ]
-      },
       {
         path: 'time-tracking',
         children: [
@@ -26,24 +17,15 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: './tab3/tab3.module#Tab3PageModule'
-          }
-        ]
-      },
-      {
         path: '',
-        redirectTo: 'tabs/tab1',
+        redirectTo: 'time-tracking',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs/tab1',
+    redirectTo: 'time-tracking',
     pathMatch: 'full'
   }
 ];

@@ -14,7 +14,7 @@ export class TimeTrackingService {
     const email = localStorage.getItem('email');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${requestToken}` });
     const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.localhost_api_url}/timeTracking`, { email, date }, { headers })
+    this.httpClient.post(`${environment.api_url}/timeTracking`, { email, date }, { headers })
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
@@ -27,7 +27,7 @@ export class TimeTrackingService {
     const email = localStorage.getItem('email');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${requestToken}` });
     const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.localhost_api_url}/timeTracking/isWorking`, { email, date }, { headers })
+    this.httpClient.post(`${environment.api_url}/timeTracking/isWorking`, { email, date }, { headers })
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
