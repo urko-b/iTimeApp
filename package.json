@@ -1,8 +1,8 @@
 {
   "name": "iTimeApp",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Pablo Guerrero González",
+  "homepage": "http://pguerrero.net/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -53,7 +53,9 @@
     "protractor": "~5.4.0",
     "ts-node": "~8.1.0",
     "tslint": "~5.16.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^8.0.1"
   },
-  "description": "An Ionic project"
+  "description": "iTime Ionic App"
 }
