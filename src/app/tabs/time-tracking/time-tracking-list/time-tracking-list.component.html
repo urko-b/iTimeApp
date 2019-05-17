@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Fichar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <app-time-tracking-clock></app-time-tracking-clock>
+
+  <app-time-tracking-buttons></app-time-tracking-buttons>
+
+  <div *ngFor="let timeTrack of timeTrackList">
+    <app-time-tracking [timeTracking]="timeTrack"></app-time-tracking>
+  </div>
+
+</ion-content>

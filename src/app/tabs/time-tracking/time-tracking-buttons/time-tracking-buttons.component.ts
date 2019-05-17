@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeTrackingService } from '../time-tracking.service';
+import { TimeTrackingService } from '../shared/time-tracking.service';
 
 @Component({
-  selector: 'app-time-tracking',
-  templateUrl: 'time-tracking.page.html',
-  styleUrls: ['time-tracking.page.scss']
+  selector: 'app-time-tracking-buttons',
+  templateUrl: 'time-tracking-buttons.component.html',
+  styleUrls: ['time-tracking-buttons.component.scss']
 })
-export class TimeTrackingPage implements OnInit {
-  public isWorking: boolean = false;
+export class TimeTrackingButtonsComponent implements OnInit {
+  public isWorking = false;
   constructor(private timeTrackingService: TimeTrackingService) {
   }
 

@@ -12,7 +12,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './time-tracking/time-tracking.module#TimeTrackingPageModule'
+            loadChildren: './time-tracking/time-tracking.module#TimeTrackingModule'
           }
         ]
       },
