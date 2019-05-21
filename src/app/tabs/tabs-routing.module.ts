@@ -9,12 +9,11 @@ const routes: Routes = [
     children: [
       {
         path: 'time-tracking-buttons',
-        children: [
-          {
-            path: '',
-            loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
-          }
-        ]
+        loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
+      },
+      {
+        path: 'time-tracking-list',
+        loadChildren: './time-tracking/time-tracking.module#TimeTrackingModule'
       },
       {
         path: '',

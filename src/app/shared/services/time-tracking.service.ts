@@ -14,11 +14,9 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public send(): void {
-    const requestToken = localStorage.getItem('requests-token');
     const email = localStorage.getItem('email');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${requestToken}` });
     const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.api_url}/timeTracking`, { email, date }, { headers })
+    this.httpClient.post(`${environment.api_url}/timeTracking`, { email, date })
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
@@ -28,11 +26,9 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public getIsWorking(): void {
-    const requestToken = localStorage.getItem('requests-token');
     const email = localStorage.getItem('email');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${requestToken}` });
     const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.api_url}/timeTracking/isWorking`, { email, date }, { headers })
+    this.httpClient.post(`${environment.api_url}/timeTracking/isWorking`, { email, date })
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
@@ -42,11 +38,8 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public getTimeTrackingList(): Observable<any> {
-    const requestToken = localStorage.getItem('requests-token');
-    const headers = new HttpHeaders({ 'Authorization': `Bearer ${requestToken}` });
-
     const email = localStorage.getItem('email');
-    return this.httpClient.post(`${environment.api_url}/timeTracking/todayTrackingsByPairs`, { email }, { headers });
+    return this.httpClient.post(`${environment.api_url}/timeTracking/todayTrackingsByPairs`, { email });
     // .subscribe((response) => {
     //   this.currentWorkingTime$.next(response);
     // }, (error) => {

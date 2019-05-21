@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { TimeTrackingComponent } from './time-tracking/time-tracking.component';
+import { TimeTrackingListComponent } from './time-tracking-list/time-tracking-list.component';
 
 
 const routes: Routes = [
-  { path: '', component: TimeTrackingComponent },
+  { path: '', component: TimeTrackingListComponent },
 ];
 
 @NgModule({

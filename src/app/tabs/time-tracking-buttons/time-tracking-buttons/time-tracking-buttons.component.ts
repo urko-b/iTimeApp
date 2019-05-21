@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TimeTrackingService } from '../../../shared/services/time-tracking.service';
+import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
 
 @Component({
   selector: 'app-time-tracking-buttons',
