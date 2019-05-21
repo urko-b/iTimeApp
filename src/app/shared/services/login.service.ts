@@ -32,6 +32,6 @@ export class LoginService {
     localStorage.removeItem('requests-token');
     localStorage.removeItem('guard-token');
     localStorage.removeItem('email');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 }

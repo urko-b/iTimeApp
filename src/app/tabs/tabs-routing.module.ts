@@ -8,26 +8,26 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'time-tracking',
+        path: 'time-tracking-buttons',
         children: [
           {
             path: '',
-            loadChildren: './time-tracking/time-tracking.module#TimeTrackingModule'
+            loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: 'time-tracking',
+        redirectTo: 'time-tracking-buttons',
         pathMatch: 'full'
       }
     ]
   },
-  {
-    path: '',
-    redirectTo: 'time-tracking',
-    pathMatch: 'full'
-  }
+  // {
+  //   path: '',
+  //   redirectTo: 'time-tracking-buttons',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({
