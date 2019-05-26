@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as io from 'socket.io-client';
 import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
 import { Socket } from 'ngx-socket-io';
 
@@ -12,7 +11,6 @@ export class TimeTrackingListComponent implements OnInit {
   public timeTrackList: any[];
 
   constructor(private socket: Socket, private timeTackingService: TimeTrackingService) {
-    console.log('socket.ioSocket', socket.ioSocket)
   }
 
   ngOnInit(): void {
@@ -24,7 +22,7 @@ export class TimeTrackingListComponent implements OnInit {
 
   private getTimeTrackingList() {
 
-    this.timeTackingService.getTimeTrackingList()
+    this.timeTackingService.getTodayTimeTrackingList()
       .subscribe((list) => this.timeTrackList = list);
   }
 }

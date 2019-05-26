@@ -37,7 +37,7 @@ export class TimeTrackingService implements OnDestroy {
       });
   }
 
-  public getTimeTrackingList(): Observable<any> {
+  public getTodayTimeTrackingList(): Observable<any> {
     const email = localStorage.getItem('email');
     return this.httpClient.post(`${environment.api_url}/timeTracking/todayTrackingsByPairs`, { email });
     // .subscribe((response) => {
@@ -47,6 +47,13 @@ export class TimeTrackingService implements OnDestroy {
     //   console.log('currentWorkingTime getIsWorking', error);
     // });
   }
+
+  public getTimeTrackingList(): Observable<any> {
+    const email = localStorage.getItem('email');
+    return this.httpClient.get(`${environment.api_url}/timeTracking`);
+  }
+
+
 
 
   ngOnDestroy(): void {

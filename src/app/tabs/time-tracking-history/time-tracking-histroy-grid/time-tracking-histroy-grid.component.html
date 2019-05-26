@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Histórico
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div padding style="width: 100%; height: 100%;">
+    <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-balham" [rowData]="timeTrackingHistoryList"
+      [columnDefs]="columnDefs">
+    </ag-grid-angular>
+  </div>
+</ion-content>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 
@@ -25,7 +25,11 @@ const isTokenValid = (token: any): boolean => {
 
 @Injectable()
 export class AuthService {
-  constructor(public httpClient: HttpClient) { }
+
+  private httpClient: HttpClient;
+  constructor(handler: HttpBackend) {
+    this.httpClient = new HttpClient(handler);
+  }
 
   public authenticate(whenComplete?: Function) {
     const headers: HttpHeaders = new HttpHeaders({ 'Authorization': environment.api_secret });

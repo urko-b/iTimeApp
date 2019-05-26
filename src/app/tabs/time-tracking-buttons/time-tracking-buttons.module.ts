@@ -6,6 +6,8 @@ import { TimeTrackingClokService } from './time-tracking-clock/time-tracking-clo
 import { TimeTrackingButtonsRoutingModule } from './time-tracking-buttons-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
+import { TimeTrackingModule } from '../time-tracking/time-tracking.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { TimeTrackingService } from 'src/app/shared/services/time-tracking.servi
   imports: [
     IonicModule,
     CommonModule,
-    TimeTrackingButtonsRoutingModule],
+    SharedModule,
+    TimeTrackingModule,
+    TimeTrackingButtonsRoutingModule
+  ],
   exports: [],
   providers: [
-    TimeTrackingClokService,
-    TimeTrackingService
+    TimeTrackingClokService
   ],
 })
 export class TimeTrackingButtonsModule { }
