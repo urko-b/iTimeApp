@@ -1,14 +1,17 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Subject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { GeolocationService } from './geolocation.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class TimeTrackingService implements OnDestroy {
   public isWorking$: Subject<any>;
   public currentWorkingTime$: Subject<any>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+    private geolocationService: GeolocationService) {
     this.isWorking$ = new Subject();
     this.currentWorkingTime$ = new Subject();
   }
@@ -16,7 +19,14 @@ export class TimeTrackingService implements OnDestroy {
   public send(): void {
     const email = localStorage.getItem('email');
     const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.api_url}/timeTracking`, { email, date })
+
+    this.geolocationService.getCurrentPosition()
+      .pipe(
+        switchMap(location => {
+          const body = { email, date, position: { longitude: location.coords.longitude, latitude: location.coords.latitude } };
+          return this.httpClient.post(`${environment.api_url}/timeTracking`, body);
+        })
+      )
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
