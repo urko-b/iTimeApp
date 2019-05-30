@@ -18,7 +18,7 @@ export class TimeTrackingService implements OnDestroy {
 
   public send(): void {
     const email = localStorage.getItem('email');
-    const date: Date = new Date(Date.now());
+    const date = new Date().toISOString();
 
     this.geolocationService.getCurrentPosition()
       .pipe(

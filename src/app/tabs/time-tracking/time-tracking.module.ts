@@ -6,11 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { TimeTrackingListComponent } from './time-tracking-list/time-tracking-list.component';
 
 import { TimeTrackingComponent } from './time-tracking/time-tracking.component';
-import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
 // ...other imports
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { TimeTrackingRoutingModule } from './time-tracking-routing.module';
 
 const config: SocketIoConfig = {
   url: environment.socket_url
@@ -22,13 +22,10 @@ const config: SocketIoConfig = {
     CommonModule,
     FormsModule,
     SharedModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    TimeTrackingRoutingModule
   ],
   declarations: [
-    TimeTrackingComponent,
-    TimeTrackingListComponent
-  ],
-  exports: [
     TimeTrackingComponent,
     TimeTrackingListComponent
   ]
