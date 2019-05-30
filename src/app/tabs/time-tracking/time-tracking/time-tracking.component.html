@@ -1,5 +1,5 @@
 <div>
-  Entrada {{ timeTracking.work.date | date:"HH:MM:SS" }} --> Salida
-  {{ timeTracking.break.date | date:"HH:MM:SS" }}
+  Entrada {{ timeTracking.work | date:"hh:mm:ss" }} --> Salida
+  {{ timeTracking.break | date:"hh:mm:ss" }}
   Horas trabajadas - {{ timeTracking.workingTime }}
 </div>

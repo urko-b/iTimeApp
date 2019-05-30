@@ -7,6 +7,12 @@ import { TimeTrackingHistroyGridComponent } from './time-tracking-histroy-grid/t
 
 import { AgGridModule } from 'ag-grid-angular';
 import { IonicModule } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
+
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: environment.socket_url
+};
 
 @NgModule({
   declarations: [
@@ -16,6 +22,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     IonicModule,
     SharedModule,
+    SocketIoModule.forRoot(config),
     AgGridModule.withComponents([]),
     TimeTrackingHistoryRoutingModule
   ],

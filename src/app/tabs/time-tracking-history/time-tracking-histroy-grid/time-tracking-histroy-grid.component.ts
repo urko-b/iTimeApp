@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Socket } from 'ngx-socket-io';
 import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
 
 @Component({
@@ -41,9 +41,17 @@ export class TimeTrackingHistroyGridComponent implements OnInit {
     }
   ];
 
-  constructor(private timeTrackingService: TimeTrackingService) { }
+  constructor(private socket: Socket, private timeTrackingService: TimeTrackingService) { }
 
   ngOnInit() {
+    this.socket.on('timeTrackAdded', () => {
+      this.getTimeTrackingHistory();
+    });
+
+    this.getTimeTrackingHistory();
+  }
+
+  private getTimeTrackingHistory() {
     this.timeTrackingService.getTimeTrackingList()
       .subscribe(data => this.timeTrackingHistoryList = data);
   }

@@ -11,5 +11,7 @@ export class TimeTrackingComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log('timeTracking', this.timeTracking)
+  }
 }
