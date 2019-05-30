@@ -31,7 +31,6 @@ export class TimeTrackingService implements OnDestroy {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
         this.isWorking$.next(false);
-        console.log('TimeTrackingService send', error);
       });
   }
 
@@ -41,7 +40,6 @@ export class TimeTrackingService implements OnDestroy {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
         this.isWorking$.next(false);
-        console.log('TimeTrackingService getIsWorking', error);
       });
   }
 
@@ -50,9 +48,29 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public getTimeTrackingList(): Observable<any> {
-    const email = localStorage.getItem('email-token');
     return this.httpClient.get(`${environment.api_url}/timeTracking`);
   }
+
+
+
+  public timeTrackingBagToday(): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagToday`);
+  }
+
+  public timeTrackingBagThisWeek(): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisWeek`);
+  }
+
+  public timeTrackingBagThisMonth(): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisMonth`);
+  }
+
+  public timeTrackingBagThisYear(): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisYear`);
+  }
+
+
+
 
 
 

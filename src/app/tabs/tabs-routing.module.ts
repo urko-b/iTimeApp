@@ -12,8 +12,8 @@ const routes: Routes = [
         loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
       },
       {
-        path: 'time-tracking-list',
-        loadChildren: './time-tracking/time-tracking.module#TimeTrackingModule'
+        path: 'time-tracking-bag',
+        loadChildren: './time-tracking-bag/time-tracking-bag.module#TimeTrackingBagModule'
       },
       {
         path: 'time-tracking-history-list',
