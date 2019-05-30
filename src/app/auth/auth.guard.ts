@@ -1,16 +1,17 @@
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { LoginService } from '../shared/services/login.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CanActivateViaAuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   canActivate() {
-    if (!this.authService.isAuthenticated()) {
+    if (!this.loginService.isAuthenticated()) {
       console.log('No estás logueado');
       this.router.navigate(['/login']);
       return false;

@@ -11,7 +11,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyErrorHandler } from './shared/error.handler';
-import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
@@ -21,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     AppRoutingModule,
     CoreModule,
-    AuthModule,
     BrowserModule,
     SharedModule,
     IonicModule.forRoot()

@@ -17,13 +17,13 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public send(): void {
-    const email = localStorage.getItem('email');
+    const email = localStorage.getItem('email-token');
     const date = new Date().toISOString();
 
     this.geolocationService.getCurrentPosition()
       .pipe(
         switchMap(location => {
-          const body = { email, date, position: { longitude: location.coords.longitude, latitude: location.coords.latitude } };
+          const body = { date, position: { longitude: location.coords.longitude, latitude: location.coords.latitude } };
           return this.httpClient.post(`${environment.api_url}/timeTracking`, body);
         })
       )
@@ -36,9 +36,7 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public getIsWorking(): void {
-    const email = localStorage.getItem('email');
-    const date: Date = new Date(Date.now());
-    this.httpClient.post(`${environment.api_url}/timeTracking/isWorking`, { email, date })
+    this.httpClient.post(`${environment.api_url}/timeTracking/isWorking`, {})
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
@@ -48,18 +46,11 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public getTodayTimeTrackingList(): Observable<any> {
-    const email = localStorage.getItem('email');
-    return this.httpClient.post(`${environment.api_url}/timeTracking/todayTrackingsByPairs`, { email });
-    // .subscribe((response) => {
-    //   this.currentWorkingTime$.next(response);
-    // }, (error) => {
-    //   this.currentWorkingTime$.next(null);
-    //   console.log('currentWorkingTime getIsWorking', error);
-    // });
+    return this.httpClient.get(`${environment.api_url}/timeTracking/todayBagOfHoursWorked`);
   }
 
   public getTimeTrackingList(): Observable<any> {
-    const email = localStorage.getItem('email');
+    const email = localStorage.getItem('email-token');
     return this.httpClient.get(`${environment.api_url}/timeTracking`);
   }
 
