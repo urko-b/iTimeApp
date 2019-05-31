@@ -17,10 +17,13 @@ export class LoginService {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     headers = headers.append('Authorization', environment.api_secret);
     this.httpClient.post(`${environment.api_url}/user/login`, body, { headers, responseType: 'text' })
-      .subscribe((token: string) => {
-        if (token !== undefined && token !== null) {
-          localStorage.setItem('requests-token', token);
+      .subscribe((authToken: string) => {
+        if (authToken === undefined && authToken === null) {
+          console.log('return undefined in login');
+          return;
         }
+        console.log('token', authToken)
+        localStorage.setItem('requests-token', authToken);
 
         localStorage.setItem('guard-token', generateToken());
         this.router.navigate(['/tabs']);

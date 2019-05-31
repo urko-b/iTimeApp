@@ -10,8 +10,8 @@ export class TimeTrackingService implements OnDestroy {
   public isWorking$: Subject<any>;
   public currentWorkingTime$: Subject<any>;
 
-  constructor(private httpClient: HttpClient,
-    private geolocationService: GeolocationService) {
+  constructor(private httpClient: HttpClient
+    /*,private geolocationService: GeolocationService */) {
     this.isWorking$ = new Subject();
     this.currentWorkingTime$ = new Subject();
   }

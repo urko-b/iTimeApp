@@ -14,8 +14,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   providers: [
     LoginService,
     TimeTrackingService,
-    Geolocation,
-    GeolocationService
+    // Geolocation,
+    // GeolocationService
   ],
 })
 export class SharedModule { }
