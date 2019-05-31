@@ -19,14 +19,19 @@ export class LoginService {
     this.httpClient.post(`${environment.api_url}/user/login`, body, { headers, responseType: 'text' })
       .subscribe((authToken: string) => {
         if (authToken === undefined && authToken === null) {
-          console.log('return undefined in login');
           return;
         }
-        console.log('token', authToken)
         localStorage.setItem('requests-token', authToken);
 
         localStorage.setItem('guard-token', generateToken());
-        this.router.navigate(['/tabs']);
+
+        this.httpClient.get(`${environment.api_url}/user/roles`)
+          .subscribe((roles) => {
+            if (roles !== null && roles !== undefined) {
+              localStorage.setItem('roles', JSON.stringify(roles));
+            }
+            this.router.navigate(['/tabs']);
+          });
       }, (error) => {
         this.subscription$.next(false);
       });

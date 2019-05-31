@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { TimeTrackingBagCanActivateGuard } from '../auth/time-tracking-bag.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'time-tracking-bag',
+        canActivate: [TimeTrackingBagCanActivateGuard],
         loadChildren: './time-tracking-bag/time-tracking-bag.module#TimeTrackingBagModule'
       },
       {

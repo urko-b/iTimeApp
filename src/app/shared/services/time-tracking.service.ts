@@ -58,20 +58,40 @@ export class TimeTrackingService implements OnDestroy {
 
 
 
-  public timeTrackingBagToday(): Observable<any> {
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagToday`);
+  public timeTrackingBagToday(email = ''): Observable<any> {
+    if (email !== undefined) {
+      email = `?email=${email}`;
+    }
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagToday${email}`);
   }
 
-  public timeTrackingBagThisWeek(): Observable<any> {
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisWeek`);
+  public timeTrackingBagThisWeek(email = ''): Observable<any> {
+    if (email !== undefined) {
+      email = `?email=${email}`;
+    }
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisWeek${email}`);
   }
 
-  public timeTrackingBagThisMonth(): Observable<any> {
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisMonth`);
+  public timeTrackingBagThisMonth(email = ''): Observable<any> {
+    if (email !== undefined) {
+      email = `?email=${email}`;
+    }
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisMonth${email}`);
   }
 
-  public timeTrackingBagThisYear(): Observable<any> {
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisYear`);
+  public timeTrackingBagThisYear(email = ''): Observable<any> {
+    if (email !== undefined) {
+      email = `?email=${email}`;
+    }
+    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisYear${email}`);
+  }
+
+
+
+
+
+  public getUsers(): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/user`);
   }
 
 

@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 export class TimeTrackingBagGridComponent implements OnInit {
   public timeTrackList: any[];
   public timeTrackColumns = [];
+  public users = [];
+  public userSelected?: string;
 
   private timeTrackAdedCallback: Function;
 
@@ -37,6 +39,10 @@ export class TimeTrackingBagGridComponent implements OnInit {
     this.socket.on('timeTrackAdded', () => {
       this.timeTrackAdedCallback();
     });
+
+    this.timeTackingService.getUsers().subscribe((users) => {
+      this.users = users;
+    });
   }
 
   private getTimeTrackingList() {
@@ -47,25 +53,30 @@ export class TimeTrackingBagGridComponent implements OnInit {
 
   public timeTrackingBagToday() {
     this.timeTrackAdedCallback = this.timeTrackingBagToday;
-    this.timeTackingService.timeTrackingBagToday()
+    this.timeTackingService.timeTrackingBagToday(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
   public timeTrackingBagThisWeek() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisWeek;
-    this.timeTackingService.timeTrackingBagThisWeek()
+    this.timeTackingService.timeTrackingBagThisWeek(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisMonth() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisMonth;
-    this.timeTackingService.timeTrackingBagThisMonth()
+    this.timeTackingService.timeTrackingBagThisMonth(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisYear() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisYear;
-    this.timeTackingService.timeTrackingBagThisYear()
+    this.timeTackingService.timeTrackingBagThisYear(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
-
   }
+
+  public timeTrackingByEmployer($event) {
+    this.userSelected = $event.detail.value;
+    this.timeTrackAdedCallback();
+  }
+
 }
