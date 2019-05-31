@@ -52,8 +52,8 @@ export class TimeTrackingService implements OnDestroy {
     return this.httpClient.get(`${environment.api_url}/timeTracking/todayBagOfHoursWorked`);
   }
 
-  public getTimeTrackingList(): Observable<any> {
-    return this.httpClient.get(`${environment.api_url}/timeTracking`);
+  public getTimeTrackingList({ rows = 10, page = 0 }): Observable<any> {
+    return this.httpClient.get(`${environment.api_url}/timeTracking?rows=${rows}&page=${page}`);
   }
 
 

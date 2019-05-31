@@ -2,17 +2,16 @@
   <app-time-tracking [timeTracking]="timeTrack"></app-time-tracking>
 </div> -->
 <h1>Bolsa de horas</h1>
-<span>Filtros</span>
 
 <div>
-  <button (click)="timeTrackingBagToday()">Hoy</button>
-  <button (click)="timeTrackingBagThisWeek()">Esta semana</button>
-  <button (click)="timeTrackingBagThisMonth()">Este Mes</button>
-  <button (click)="timeTrackingBagThisYear()">Este Año</button>
+  <ion-button color="primary" (click)="timeTrackingBagToday()">Hoy</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisWeek()">Esta semana</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisMonth()">Este Mes</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisYear()">Este Año</ion-button>
 </div>
 
 <div padding style="width: 100%; height: 100%;">
   <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-balham" [rowData]="timeTrackList"
-    [columnDefs]="timeTrackColumns">
+    [columnDefs]="timeTrackColumns" [pagination]="true">
   </ag-grid-angular>
 </div>

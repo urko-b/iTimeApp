@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { TimeTrackingHistoryRoutingModule } from './time-tracking-history-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,6 +28,9 @@ const config: SocketIoConfig = {
   ],
   exports: [
     TimeTrackingHistroyGridComponent
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class TimeTrackingHistoryModule { }

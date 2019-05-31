@@ -33,8 +33,7 @@ export class LoginService {
   }
 
   public logout(): void {
-    localStorage.removeItem('requests-token');
-    localStorage.removeItem('guard-token');
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 
