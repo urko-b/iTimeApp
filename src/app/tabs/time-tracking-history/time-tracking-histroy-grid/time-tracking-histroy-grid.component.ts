@@ -9,36 +9,38 @@ import { TimeTrackingService } from 'src/app/shared/services/time-tracking.servi
 })
 export class TimeTrackingHistroyGridComponent implements OnInit {
 
-  private timeTrackingHistoryList: any;
-  private columnDefs = [
-    { headerName: 'Name', field: 'user.name', sortable: true, filter: true, resizable: true },
-    { headerName: 'Surname', field: 'user.surname', sortable: true, filter: true, resizable: true },
-    { headerName: 'Email', field: 'user.email', sortable: true, filter: true, resizable: true },
-    {
-      headerName: 'Date', field: 'date', sortable: true, filter: true, resizable: true,
-      valueFormatter: (params) => {
-        return new Date(params.value);
-      }
-    },
-    {
-      headerName: 'Position', field: 'position', sortable: true, filter: true, resizable: true,
-      valueFormatter: (params) => {
-        if (params.value === undefined) {
-          return '';
-        }
-        return JSON.stringify(params.value);
-      }
-    },
-    {
-      headerName: 'Is Working', field: 'is_working', sortable: true, filter: true, resizable: true,
-      cellRenderer: (params) => {
-        return params.value === true
-          ? '<i class="fas fa-circle working" style="color:green"></i>' : '<i class="fas fa-circle pause" style="color:red"></i>';
-      }
-    }
-  ];
+  public timeTrackingHistoryList: any;
+  public columnDefs = [];
 
-  constructor(private socket: Socket, private timeTrackingService: TimeTrackingService) { }
+  constructor(private socket: Socket, private timeTrackingService: TimeTrackingService) {
+    this.columnDefs = [
+      { headerName: 'Name', field: 'user.name', sortable: true, filter: true, resizable: true },
+      { headerName: 'Surname', field: 'user.surname', sortable: true, filter: true, resizable: true },
+      { headerName: 'Email', field: 'user.email', sortable: true, filter: true, resizable: true },
+      {
+        headerName: 'Date', field: 'date', sortable: true, filter: true, resizable: true,
+        valueFormatter: (params) => {
+          return new Date(params.value);
+        }
+      },
+      {
+        headerName: 'Position', field: 'position', sortable: true, filter: true, resizable: true,
+        valueFormatter: (params) => {
+          if (params.value === undefined) {
+            return '';
+          }
+          return JSON.stringify(params.value);
+        }
+      },
+      {
+        headerName: 'Is Working', field: 'is_working', sortable: true, filter: true, resizable: true,
+        cellRenderer: (params) => {
+          return params.value === true
+            ? '<i class="fas fa-circle working" style="color:green"></i>' : '<i class="fas fa-circle pause" style="color:red"></i>';
+        }
+      }
+    ];
+  }
 
   ngOnInit() {
     this.socket.on('timeTrackAdded', () => {

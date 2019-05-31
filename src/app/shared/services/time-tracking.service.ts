@@ -17,16 +17,21 @@ export class TimeTrackingService implements OnDestroy {
   }
 
   public send(): void {
-    const email = localStorage.getItem('email-token');
     const date = new Date().toISOString();
 
-    this.geolocationService.getCurrentPosition()
-      .pipe(
-        switchMap(location => {
-          const body = { date, position: { longitude: location.coords.longitude, latitude: location.coords.latitude } };
-          return this.httpClient.post(`${environment.api_url}/timeTracking`, body);
-        })
-      )
+    // this.geolocationService.getCurrentPosition()
+    //   .pipe(
+    //     switchMap(location => {
+    //       const body = { date, position: { longitude: location.coords.longitude, latitude: location.coords.latitude } };
+    //       return this.httpClient.post(`${environment.api_url}/timeTracking`, body);
+    //     })
+    //   )
+    //   .subscribe((response) => {
+    //     this.isWorking$.next(response['isWorking']);
+    //   }, (error) => {
+    //     this.isWorking$.next(false);
+    //   });
+    this.httpClient.post(`${environment.api_url}/timeTracking`, { date })
       .subscribe((response) => {
         this.isWorking$.next(response['isWorking']);
       }, (error) => {
