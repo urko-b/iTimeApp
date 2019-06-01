@@ -3,16 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable()
 export class LoginService {
   public subscription$: Subject<any> = new Subject();
   constructor(
     private httpClient: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private localStorageService: LocalStorageService) {
   }
 
   public login(email: string, password: string): void {
+    this.localStorageService.clear();
     const body = { email, password };
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     headers = headers.append('Authorization', environment.api_secret);
@@ -21,14 +24,14 @@ export class LoginService {
         if (authToken === undefined && authToken === null) {
           return;
         }
-        localStorage.setItem('requests-token', authToken);
 
-        localStorage.setItem('guard-token', generateToken());
+        this.localStorageService.setItem('requests-token', authToken);
+        this.localStorageService.setItem('guard-token', generateToken());
 
         this.httpClient.get(`${environment.api_url}/user/roles`)
           .subscribe((roles) => {
             if (roles !== null && roles !== undefined) {
-              localStorage.setItem('roles', JSON.stringify(roles));
+              this.localStorageService.setItem('roles', JSON.stringify(roles));
             }
             this.router.navigate(['/tabs']);
           });
@@ -38,14 +41,14 @@ export class LoginService {
   }
 
   public logout(): void {
-    localStorage.clear();
+    this.localStorageService.clear();
     this.router.navigate(['/login']);
   }
 
 
 
   public isAuthenticated(): boolean {
-    const guardToken = localStorage.getItem('guard-token');
+    const guardToken = this.localStorageService.getItem('guard-token');
     if (guardToken === undefined || guardToken == null) {
       return false;
     }

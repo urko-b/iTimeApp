@@ -10,14 +10,16 @@ import {
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpConfigInterceptor implements HttpInterceptor {
-  constructor() { }
+  constructor(private localStorageService: LocalStorageService) { }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = localStorage.getItem('requests-token');
+    const token: string = this.localStorageService.getItem('requests-token');
     if (token) {
       request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + token) });
     }

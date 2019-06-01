@@ -28,7 +28,7 @@ import { SharedModule } from './shared/shared.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: ErrorHandler, useClass: MyErrorHandler },
+    // { provide: ErrorHandler, useClass: MyErrorHandler },
   ],
   bootstrap: [AppComponent]
 })

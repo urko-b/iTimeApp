@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,8 +8,8 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
   public show_time_tracking_bag = false;
-  constructor() {
-    const roles = localStorage.getItem('roles');
+  constructor(private localStorageService: LocalStorageService) {
+    const roles = this.localStorageService.getItem('roles');
     if (roles !== undefined && roles !== null) {
       this.show_time_tracking_bag = JSON.parse(roles).some((rol) => rol === 'show_time_tracking_bag');
     }
