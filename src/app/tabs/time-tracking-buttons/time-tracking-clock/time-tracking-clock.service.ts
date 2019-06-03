@@ -13,6 +13,7 @@ export class TimeTrackingClokService {
     this.clock$ = timer(0, 1000).pipe(map(t => new Date()), shareReplay(1));
   }
 
+
   getClock(): Subject<TimeTrackingClock> {
     this.clock$.subscribe(t => {
       this.model = {
