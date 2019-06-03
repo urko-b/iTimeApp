@@ -8,15 +8,14 @@
 
 <ion-content padding>
   <app-time-tracking-clock></app-time-tracking-clock>
-
   <div padding *ngIf="isWorking">
-    <ion-button size="large" type="buton" (click)="pause()" expand="block">Pause</ion-button>
+    <ion-button size="large" type="buton" mat-button (click)="pause()" expand="block">Pausa</ion-button>
   </div>
   <div padding *ngIf="!isWorking">
-    <ion-button size="large" type="buton" (click)="work()" expand="block">Work</ion-button>
+    <ion-button size="large" type="buton" mat-button (click)="work()" expand="block">Trabajar</ion-button>
   </div>
 
-  <div padding>
+  <!-- <div padding>
     <ion-button size="large" type="buton" (click)="finish()" expand="block">Finish Work</ion-button>
-  </div>
+  </div> -->
 </ion-content>

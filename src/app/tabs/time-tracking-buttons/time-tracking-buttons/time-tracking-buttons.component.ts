@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-time-tracking-buttons',
@@ -8,7 +10,8 @@ import { TimeTrackingService } from 'src/app/shared/services/time-tracking.servi
 })
 export class TimeTrackingButtonsComponent implements OnInit {
   public isWorking = false;
-  constructor(private timeTrackingService: TimeTrackingService) {
+  constructor(private timeTrackingService: TimeTrackingService,
+    public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -22,14 +25,24 @@ export class TimeTrackingButtonsComponent implements OnInit {
   }
 
   public pause() {
-    this.timeTrackingService.send();
+    this.openConfirmDialog('¿Está seguro de que desea pausar?');
   }
 
   public work() {
-    this.timeTrackingService.send();
+    this.openConfirmDialog('¿Está seguro de que desea fichar?')
   }
 
-  public finish() {
-
+  private openConfirmDialog(confirmMessage: string): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: confirmMessage
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.timeTrackingService.send();
+      }
+    });
   }
+
+
 }

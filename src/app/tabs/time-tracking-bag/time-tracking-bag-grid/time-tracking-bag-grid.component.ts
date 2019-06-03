@@ -49,10 +49,7 @@ export class TimeTrackingBagGridComponent implements OnInit {
           });
 
           if (this.gridApi !== undefined && sum !== undefined) {
-            console.log('humanize', sum.humanize());
-            const workingTime = new Date(sum.asSeconds() * 1000).toISOString().substr(11, 8);
-
-            var formatted = (moment.duration(sum.asSeconds(), 'seconds') as any).format("hh:mm:ss");;
+            var formatted = (moment.duration(sum.asSeconds(), 'seconds') as any).format("hh:mm:ss");
 
             const pinnedBottomRowData = [{ 'work': '', 'break': '', 'workingTime': formatted }];
             this.gridApi.setPinnedBottomRowData(pinnedBottomRowData);

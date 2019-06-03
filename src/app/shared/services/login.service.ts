@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { EncryptService } from './encrypt.service';
 
 @Injectable()
 export class LoginService {
@@ -11,7 +12,8 @@ export class LoginService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private localStorageService: LocalStorageService) {
+    private localStorageService: LocalStorageService,
+    private encryptService: EncryptService) {
   }
 
   public login(email: string, password: string): void {
@@ -26,7 +28,7 @@ export class LoginService {
         }
 
         this.localStorageService.setItem('requests-token', authToken);
-        this.localStorageService.setItem('guard-token', generateToken());
+        this.localStorageService.setItem('guard-token', this.encryptService.generateToken());
 
         this.httpClient.get(`${environment.api_url}/user/roles`)
           .subscribe((roles) => {
@@ -53,7 +55,7 @@ export class LoginService {
       return false;
     }
 
-    if (!isTokenValid(guardToken)) {
+    if (!this.encryptService.isTokenValid(guardToken)) {
       return false;
     }
 
@@ -63,23 +65,4 @@ export class LoginService {
 
 
 
-const encode = (plainValue: string): string => {
-  return btoa(plainValue);
-};
-
-const decode = (encodedValue: string): string => {
-  return atob(encodedValue);
-};
-
-const generateToken = (): string => {
-  const nowDate = new Date(Date.now());
-  nowDate.setHours(nowDate.getHours() + 1);
-  return encode(nowDate.toString());
-};
-
-const isTokenValid = (token: any): boolean => {
-  const dateToken: Date = new Date(Date.parse(decode(token)));
-  const dateNow: Date = new Date(Date.now());
-  return dateToken > dateNow;
-};
 
