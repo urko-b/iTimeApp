@@ -58,33 +58,6 @@ export class TimeTrackingService implements OnDestroy {
 
 
 
-  public timeTrackingBagToday(email = ''): Observable<any> {
-    if (email !== undefined) {
-      email = `?email=${email}`;
-    }
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagToday${email}`);
-  }
-
-  public timeTrackingBagThisWeek(email = ''): Observable<any> {
-    if (email !== undefined) {
-      email = `?email=${email}`;
-    }
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisWeek${email}`);
-  }
-
-  public timeTrackingBagThisMonth(email = ''): Observable<any> {
-    if (email !== undefined) {
-      email = `?email=${email}`;
-    }
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisMonth${email}`);
-  }
-
-  public timeTrackingBagThisYear(email = ''): Observable<any> {
-    if (email !== undefined) {
-      email = `?email=${email}`;
-    }
-    return this.httpClient.get(`${environment.api_url}/timeTracking/timeTrackingBagThisYear${email}`);
-  }
 
 
 
