@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTrackingService } from 'src/app/shared/services/time-tracking.service';
+import { WorkedHoursService } from 'src/app/shared/services/worked-hours.service';
 import { Socket } from 'ngx-socket-io';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
@@ -7,11 +8,11 @@ import * as  momentDurationFormatSetup from 'moment-duration-format';
 momentDurationFormatSetup(moment);
 
 @Component({
-  selector: 'app-time-tracking-bag-grid',
-  templateUrl: './time-tracking-bag-grid.component.html',
-  styleUrls: ['./time-tracking-bag-grid.component.scss']
+  selector: 'app-worked-hours-grid',
+  templateUrl: './worked-hours-grid.component.html',
+  styleUrls: ['./worked-hours-grid.component.scss']
 })
-export class TimeTrackingBagGridComponent implements OnInit {
+export class WorkedHoursGridComponent implements OnInit {
   public timeTrackList: any[];
   public timeTrackColumns = [];
   private gridApi;
@@ -20,7 +21,10 @@ export class TimeTrackingBagGridComponent implements OnInit {
 
   private timeTrackAdedCallback: Function;
 
-  constructor(private datePipe: DatePipe, private socket: Socket, private timeTackingService: TimeTrackingService) {
+  constructor(private datePipe: DatePipe,
+    private socket: Socket,
+    private timeTackingService: TimeTrackingService,
+    private workedHoursService: WorkedHoursService) {
     this.initColumnsDefinition();
   }
 
@@ -78,30 +82,30 @@ export class TimeTrackingBagGridComponent implements OnInit {
 
   private getTimeTrackingList() {
     this.timeTrackAdedCallback = this.getTimeTrackingList;
-    this.timeTackingService.getTodayTimeTrackingList()
+    this.workedHoursService.timeTrackingBagToday(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
 
   public timeTrackingBagToday() {
     this.timeTrackAdedCallback = this.timeTrackingBagToday;
-    this.timeTackingService.timeTrackingBagToday(this.userSelected)
+    this.workedHoursService.timeTrackingBagToday(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
   public timeTrackingBagThisWeek() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisWeek;
-    this.timeTackingService.timeTrackingBagThisWeek(this.userSelected)
+    this.workedHoursService.timeTrackingBagThisWeek(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisMonth() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisMonth;
-    this.timeTackingService.timeTrackingBagThisMonth(this.userSelected)
+    this.workedHoursService.timeTrackingBagThisMonth(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisYear() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisYear;
-    this.timeTackingService.timeTrackingBagThisYear(this.userSelected)
+    this.workedHoursService.timeTrackingBagThisYear(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
 

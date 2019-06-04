@@ -9,8 +9,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
-import { TimeTrackingBagRoutingModule } from './time-tracking-bag-routing.module';
-import { TimeTrackingBagGridComponent } from './time-tracking-bag-grid/time-tracking-bag-grid.component';
+import { WorkedHoursRoutingModule } from './worked-hours-routing.module';
+import { WorkedHoursGridComponent } from './worked-hours-grid/worked-hours-grid.component';
 
 const config: SocketIoConfig = {
   url: environment.socket_url
@@ -23,14 +23,14 @@ const config: SocketIoConfig = {
     FormsModule,
     SharedModule,
     SocketIoModule.forRoot(config),
-    TimeTrackingBagRoutingModule,
+    WorkedHoursRoutingModule,
     AgGridModule.withComponents([]),
   ],
   declarations: [
-    TimeTrackingBagGridComponent
+    WorkedHoursGridComponent
   ],
   providers: [
     DatePipe
   ]
 })
-export class TimeTrackingBagModule { }
+export class WorkedHoursModule { }

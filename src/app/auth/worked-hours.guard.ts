@@ -6,7 +6,7 @@ import { LocalStorageService } from '../shared/services/local-storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TimeTrackingBagCanActivateGuard implements CanActivate {
+export class WorkedHoursCanActivateGuard implements CanActivate {
   constructor(private localStorageService: LocalStorageService) {
   }
   canActivate() {

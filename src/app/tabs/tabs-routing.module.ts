@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
-import { TimeTrackingBagCanActivateGuard } from '../auth/time-tracking-bag.guard';
+import { WorkedHoursCanActivateGuard } from '../auth/worked-hours.guard';
 
 const routes: Routes = [
   {
@@ -13,9 +13,9 @@ const routes: Routes = [
         loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
       },
       {
-        path: 'time-tracking-bag',
-        canActivate: [TimeTrackingBagCanActivateGuard],
-        loadChildren: './time-tracking-bag/time-tracking-bag.module#TimeTrackingBagModule'
+        path: 'worked-hours',
+        canActivate: [WorkedHoursCanActivateGuard],
+        loadChildren: './worked-hours/worked-hours.module#WorkedHoursModule'
       },
       {
         path: 'time-tracking-history-list',

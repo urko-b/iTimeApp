@@ -1,13 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { TimeTrackingBagGridComponent } from './time-tracking-bag-grid/time-tracking-bag-grid.component';
+import { WorkedHoursGridComponent } from './worked-hours-grid/worked-hours-grid.component';
 
 const routes: Routes = [
-  { path: '', component: TimeTrackingBagGridComponent },
+  { path: '', component: WorkedHoursGridComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TimeTrackingBagRoutingModule { }
+export class WorkedHoursRoutingModule { }
