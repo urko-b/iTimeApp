@@ -8,7 +8,6 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class WorkedHoursService {
-  // moment().startOf('week').toDate()
   constructor(
     private httpClient: HttpClient) {
   }
