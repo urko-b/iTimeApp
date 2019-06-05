@@ -9,6 +9,6 @@ export class TimeTrackingButtonsTimerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 }

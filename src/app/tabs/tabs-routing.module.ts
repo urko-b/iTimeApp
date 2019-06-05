@@ -9,8 +9,8 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'time-tracking-buttons',
-        loadChildren: './time-tracking-buttons/time-tracking-buttons.module#TimeTrackingButtonsModule'
+        path: 'time-tracking',
+        loadChildren: './time-tracking/time-tracking.module#TimeTrackingModule'
       },
       {
         path: 'worked-hours',
@@ -23,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'time-tracking-buttons',
+        redirectTo: 'time-tracking',
         pathMatch: 'full'
       }
     ]
