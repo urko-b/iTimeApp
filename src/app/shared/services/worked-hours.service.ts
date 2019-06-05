@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import * as moment from 'moment';
 
 @Injectable({
@@ -12,24 +12,27 @@ export class WorkedHoursService {
     private httpClient: HttpClient) {
   }
 
-
-  public timeTrackingBagToday(email = ''): Observable<any> {
+  public getTodayWorkedHours(email = ''): Observable<any> {
     return this.getWorkedHours({ email });
   }
 
-  public timeTrackingBagThisWeek(email = ''): Observable<any> {
+  public getTodayWorkedHoursList(email = ''): Observable<any> {
+    return this.getWorkedHours({ email });
+  }
+
+  public getThisWeekWorkedHoursList(email = ''): Observable<any> {
     const from = moment().startOf('week').toDate();
     const to = moment().endOf('week').toDate();
     return this.getWorkedHours({ from, to, email });
   }
 
-  public timeTrackingBagThisMonth(email = ''): Observable<any> {
+  public getThisMonthWorkedHoursList(email = ''): Observable<any> {
     const from = moment().startOf('month').toDate();
     const to = moment().endOf('month').toDate();
     return this.getWorkedHours({ from, to, email });
   }
 
-  public timeTrackingBagThisYear(email = ''): Observable<any> {
+  public getThisYearWorkedHoursList(email = ''): Observable<any> {
     const from = moment().startOf('year').toDate();
     const to = moment().endOf('year').toDate();
     return this.getWorkedHours({ from, to, email });
@@ -37,20 +40,25 @@ export class WorkedHoursService {
 
   private getWorkedHours({ from = null, to = null, email = null }): Observable<any> {
     let queryParams = '';
-    if (from !== undefined && from !== null) {
-      queryParams = `?from=${from}`;
-    }
 
-    if (to !== undefined && to !== null) {
-      queryParams = queryParams !== '' ? `${queryParams}&` : '?';
-      queryParams = `${queryParams}to=${to}`;
-    }
+    pipe(
+      (params) => getQueryParam('from', from, params),
+      (params) => getQueryParam('to', to, params),
+      (params) => getQueryParam('email', email, params)
+    )(queryParams);
 
-    if (email !== undefined) {
-      queryParams = queryParams !== '' ? `${queryParams}&` : '?';
-      queryParams = `${queryParams}email=${email}`;
-    }
+    debugger;
+    // queryParams = getQueryParam('from', from, queryParams);
+    // queryParams = getQueryParam('to', to, queryParams);
+    // queryParams = getQueryParam('email', email, queryParams);
 
     return this.httpClient.get(`${environment.api_url}/workedHours${queryParams}`);
   }
 }
+
+const getQueryParam = (queryParamName, queryParamValue, queryParams) => {
+  if (queryParamName !== undefined) {
+    queryParams = queryParams !== '' ? `${queryParams}&` : '?';
+    queryParams = `${queryParams}${queryParamName}=${queryParamValue}`;
+  }
+};

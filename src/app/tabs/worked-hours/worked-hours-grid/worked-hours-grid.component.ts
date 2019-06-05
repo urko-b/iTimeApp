@@ -82,30 +82,30 @@ export class WorkedHoursGridComponent implements OnInit {
 
   private getTimeTrackingList() {
     this.timeTrackAdedCallback = this.getTimeTrackingList;
-    this.workedHoursService.timeTrackingBagToday(this.userSelected)
+    this.workedHoursService.getTodayWorkedHoursList(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
 
   public timeTrackingBagToday() {
     this.timeTrackAdedCallback = this.timeTrackingBagToday;
-    this.workedHoursService.timeTrackingBagToday(this.userSelected)
+    this.workedHoursService.getTodayWorkedHoursList(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
   public timeTrackingBagThisWeek() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisWeek;
-    this.workedHoursService.timeTrackingBagThisWeek(this.userSelected)
+    this.workedHoursService.getThisWeekWorkedHoursList(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisMonth() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisMonth;
-    this.workedHoursService.timeTrackingBagThisMonth(this.userSelected)
+    this.workedHoursService.getThisMonthWorkedHoursList(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
 
   }
   public timeTrackingBagThisYear() {
     this.timeTrackAdedCallback = this.timeTrackingBagThisYear;
-    this.workedHoursService.timeTrackingBagThisYear(this.userSelected)
+    this.workedHoursService.getThisYearWorkedHoursList(this.userSelected)
       .subscribe((list) => this.timeTrackList = list);
   }
 

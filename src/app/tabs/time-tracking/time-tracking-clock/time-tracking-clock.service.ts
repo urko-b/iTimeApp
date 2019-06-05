@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, timer } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { TimeTrackingClock } from './time-trackig-clock.model';
+import { WorkedHoursService } from 'src/app/shared/services/worked-hours.service';
 
 @Injectable()
 export class TimeTrackingClokService {
@@ -9,7 +10,8 @@ export class TimeTrackingClokService {
   private clock$ = new Observable<Date>();
   private model: TimeTrackingClock;
 
-  constructor() {
+  constructor(private workedHoursService: WorkedHoursService) {
+    this.workedHoursService.getTodayWorkedHoursList
     this.clock$ = timer(0, 1000).pipe(map(t => new Date()), shareReplay(1));
   }
 
