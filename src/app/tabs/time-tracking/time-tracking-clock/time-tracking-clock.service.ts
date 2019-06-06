@@ -3,29 +3,24 @@ import { Observable, Subject, timer } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { TimeTrackingClock } from './time-trackig-clock.model';
 import { WorkedHoursService } from 'src/app/shared/services/worked-hours.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class TimeTrackingClokService {
-  private timetracking$ = new Subject<TimeTrackingClock>();
-  private clock$ = new Observable<Date>();
+  private timetracking$ = new Subject<any>();
+  private clock$ = new Observable<any>();
   private model: TimeTrackingClock;
 
   constructor(private workedHoursService: WorkedHoursService) {
-    this.workedHoursService.getTodayWorkedHoursList
-    this.clock$ = timer(0, 1000).pipe(map(t => new Date()), shareReplay(1));
+    this.workedHoursService.getTodayWorkedHours().subscribe((workedHours) => {
+      this.clock$ = timer(0, 1000).pipe(map(t => moment(workedHours)), shareReplay(1));
+    });
   }
 
 
-  getClock(): Subject<TimeTrackingClock> {
+  getClock(): Subject<any> {
     this.clock$.subscribe(t => {
-      this.model = {
-        hours: t.getHours(),
-        minutes: (t.getMinutes() < 10) ? '0' + t.getMinutes() : t.getMinutes().toString(),
-        dayAndMonth: t.toLocaleString('es-ES', { day: '2-digit', month: 'long' }),
-        weekDay: t.toLocaleString('es-ES', { weekday: 'long' }),
-        seconds: t.getSeconds() < 10 ? '0' + t.getSeconds() : t.getSeconds().toString()
-      };
-      this.timetracking$.next(this.model);
+      this.timetracking$.next(t);
     });
     return this.timetracking$;
   }
