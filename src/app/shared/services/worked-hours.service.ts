@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, pipe } from 'rxjs';
 import * as moment from 'moment';
@@ -39,20 +39,12 @@ export class WorkedHoursService {
   }
 
   private getWorkedHours({ from = null, to = null, email = null }): Observable<any> {
-    let queryParams = '';
-
-    pipe(
+    return pipe(
       (params) => getQueryParam('from', from, params),
       (params) => getQueryParam('to', to, params),
-      (params) => getQueryParam('email', email, params)
-    )(queryParams);
-
-    debugger;
-    // queryParams = getQueryParam('from', from, queryParams);
-    // queryParams = getQueryParam('to', to, queryParams);
-    // queryParams = getQueryParam('email', email, queryParams);
-
-    return this.httpClient.get(`${environment.api_url}/workedHours${queryParams}`);
+      (params) => getQueryParam('email', email, params),
+      (params) => this.httpClient.get(`${environment.api_url}/workedHours${params}`)
+    )('');
   }
 }
 
@@ -61,4 +53,5 @@ const getQueryParam = (queryParamName, queryParamValue, queryParams) => {
     queryParams = queryParams !== '' ? `${queryParams}&` : '?';
     queryParams = `${queryParams}${queryParamName}=${queryParamValue}`;
   }
+  return queryParams;
 };
