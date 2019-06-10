@@ -1,0 +1,11 @@
+{
+  "name": "itimeapp-serverless",
+  "custom": {
+    "client": {
+      "bucketName": "itimeapp-serverless-${stage}-${region}"
+    }
+  },
+  "plugins": [
+    "serverless-client-s3"
+  ]
+}

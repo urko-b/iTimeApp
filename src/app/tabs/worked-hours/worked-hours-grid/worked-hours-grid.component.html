@@ -1,0 +1,22 @@
+<!-- <div *ngFor="let timeTrack of timeTrackList">
+  <app-time-tracking [timeTracking]="timeTrack"></app-time-tracking>
+</div> -->
+<h1>Cómputo Horas</h1>
+
+<div>
+  <ion-button color="primary" (click)="timeTrackingBagToday()">Hoy</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisWeek()">Esta semana</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisMonth()">Este Mes</ion-button>
+  <ion-button color="primary" (click)="timeTrackingBagThisYear()">Este Año</ion-button>
+</div>
+<div>
+  <ion-select placeholder="Empleados" (ionChange)="timeTrackingByEmployer($event)">
+    <ion-select-option *ngFor="let user of users" [value]="user.email">{{user.email}}</ion-select-option>
+  </ion-select>
+</div>
+
+<div padding style="width: 100%; height: 75%;">
+  <ag-grid-angular style="width: 100%; height: 100%;" class="ag-theme-balham" [rowData]="timeTrackList"
+    [columnDefs]="timeTrackColumns" [pagination]="true" (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+</div>

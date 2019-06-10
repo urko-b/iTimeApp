@@ -1,5 +1,7 @@
 {
   "name": "iTimeApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

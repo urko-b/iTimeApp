@@ -20,6 +20,7 @@ npm-debug.log*
 .versions/
 coverage/
 www/
+client/
 node_modules/
 tmp/
 temp/
@@ -34,3 +35,10 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 .env
+*.env
+resources/
+_meta/
+
+s-project.json
+s-resources-cf.json
+

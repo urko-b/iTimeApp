@@ -4,10 +4,19 @@ import { CanActivateViaAuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: './pages/login/login.module#LoginModule'
+    path: 'tabs',
+    loadChildren: './tabs/tabs.module#TabsPageModule',
+    canActivate: [CanActivateViaAuthGuard]
   },
-  { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule', canActivate: [CanActivateViaAuthGuard] }
+  {
+    path: 'login',
+    loadChildren: './login/login.module#LoginModule'
+  },
+  {
+    path: '',
+    redirectTo: 'tabs',
+    pathMatch: 'full'
+  }
 ];
 @NgModule({
   imports: [
